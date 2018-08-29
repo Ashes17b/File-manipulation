@@ -1,11 +1,11 @@
 # File-manipulation
-Build(OS X and later): <br />
-    1) install boost, google tests. <br />
-    2) make <br />
+Build: <br />
+    1) First step install boost, google tests. <br />
+    2) Use command: make <br />
   
 Run: <br />
-    1) ./testAll <br />
+    1) Write: ./testAll <br />
   
 Clean: <br />
-    1) make clean 
+    1) Use command: make clean 
   
