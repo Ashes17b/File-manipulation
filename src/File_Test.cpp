@@ -2,11 +2,7 @@
 #include "gtest/gtest.h"
 #include "File.h"
 
-class FileTest : public::testing::Test {
-protected:
-    virtual void SetUp() {}
-    virtual void TearDown() {}
-};
+class FileTest : public::testing::Test {};
 
 bool compareFiles(const string &p1, const string &p2) {
     ifstream f1(p1, ifstream::binary | ifstream::ate);
