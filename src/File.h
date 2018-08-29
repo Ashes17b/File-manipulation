@@ -1,4 +1,5 @@
-#include <boost/algorithm/string.hpp>
+#include <regex>
+#include <string>
 #include <iostream>
 #include <algorithm>
 #include <fstream>
@@ -13,11 +14,6 @@ class File
     string nameOutFile;
     string word;
 
-    void vector_string_toLower(vector<string> &data) {
-        for (unsigned int i = 0; i < data.size(); i++)
-            boost::to_lower(data[i]);
-    }
-
     //Blocked copy
     File(File &) {}
     void operator=(const File &) {}
@@ -31,5 +27,5 @@ class File
     ~File() {}
 
     void readFileAndChange();
-    string removeSpecificWord(const string &line);
+    void removeCertainWordFromString(string&);
 };

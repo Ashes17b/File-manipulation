@@ -1,5 +1,16 @@
 #include "File.h"
 
+bool stringCompare(const string &left, const string &right) {
+    for (string::const_iterator lit = left.begin(), rit = right.begin(); lit != left.end() && rit != right.end(); ++lit, ++rit)
+        if (tolower(*lit) < tolower(*rit))
+            return true;
+        else if (tolower(*lit) > tolower(*rit))
+            return false;
+    if (left.size() < right.size())
+        return true;
+    return false;
+}
+
 void File::readFileAndChange() {
     try 
     {
@@ -16,10 +27,13 @@ void File::readFileAndChange() {
         }
 
         string line;
+        vector<string> data;
         while (getline(infile, line)) {
-            string lineChanged = removeSpecificWord(line);
-            outfile << lineChanged << endl;
+            removeCertainWordFromString(line);
+            data.push_back(line);
+            sort(data.begin(), data.end(), stringCompare);
         }
+        copy(data.begin(), data.end(), ostream_iterator<string>(outfile, "\n"));
 
         outfile.close();
         infile.close();
@@ -28,15 +42,10 @@ void File::readFileAndChange() {
     }
 }
 
-string File::removeSpecificWord(const string &line) {
-    vector<string> data;
-    boost::split(data, line, boost::is_any_of(" ,.:"));
-    data.erase(remove(data.begin(), data.end(), word), data.end());
-    vector_string_toLower(data);
-    sort(data.begin(), data.end());
-
-    string result = "";
-    for (const auto &i : data)
-        result += i + ' ';
-    return result;
+void File::removeCertainWordFromString(string &line) {
+    regex r("\\b" + word + "\\b"); 
+    smatch m;
+    
+    while(regex_search(line, m, r)) 
+        line.erase(m.position(), m.length() + 1);
 }
