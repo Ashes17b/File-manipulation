@@ -46,6 +46,10 @@ void File::removeCertainWordFromString(string &line) {
     regex r("\\b" + word + "\\b"); 
     smatch m;
     
-    while(regex_search(line, m, r)) 
-        line.erase(m.position(), m.length() + 1);
+    while(regex_search(line, m, r)) {
+        auto pos = m.position();
+        line.erase(m.position(), m.length());
+        if (isspace(line.at(pos)))
+            line.erase(m.position(), 1);
+    }
 }

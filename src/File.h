@@ -1,4 +1,5 @@
 #include <regex>
+#include <cctype>
 #include <string>
 #include <iostream>
 #include <algorithm>
